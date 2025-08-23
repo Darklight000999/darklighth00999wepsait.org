@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>darklight000999 - Secure Viewer</title>
+  <style>
+    * {margin:0; padding:0; box-sizing:border-box;}
+
+    body {
+      font-family: 'Courier New', monospace;
+      background: black;
+      color: #00ff00;
+      overflow-x: hidden;
+      user-select: none; /* ❌ Copy block */
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      background: black;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #00ff00;
+      text-shadow: 0 0 15px #00ff00;
+      border-bottom: 2px solid #00ff00;
+      margin-bottom: 20px;
+    }
+
+    nav {
+      text-align: center;
+      margin: 20px;
+    }
+
+    nav button {
+      margin: 10px;
+      padding: 10px 20px;
+      background: #00ff00;
+      color: black;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 0 10px #00ff00;
+    }
+
+    section {
+      display: none;
+      padding: 20px;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    .viewer img {
+      max-width: 80%;
+      margin: 20px auto;
+      display: block;
+      pointer-events: none; /* ❌ Save image block */
+      box-shadow: 0 0 20px #00ff00;
+      border-radius: 10px;
+      position: relative;
+    }
+
+    /* Dynamic Watermark */
+    .watermark {
+      position: absolute;
+      color: rgba(0, 255, 0, 0.2);
+      font-size: 24px;
+      transform: rotate(-30deg);
+      pointer-events: none;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="matrix"></canvas>
+
+  <header>darklight000999</header>
+
+  <!-- Navigation -->
+  <nav>
+    <button onclick="showSection('notes')">📒 Notes</button>
+    <button onclick="showSection('pdf')">📕 PDF Viewer</button>
+  </nav>
+
+  <!-- Notes Section -->
+  <section id="notes" class="active">
+    <h2>📒 Secure Notes</h2>
+    <p>
+      यह सेक्शन आपके Text Notes के लिए है।  
+      यहाँ आप Premium Students को Notes दिखा सकते हैं।  
+      <br><br>
+      Example:  
+      - Topic 1: Introduction to Physics  
+      - Topic 2: Laws of Motion  
+      - Topic 3: Gravitation  
+    </p>
+  </section>
+
+  <!-- PDF Section -->
+  <section id="pdf">
+    <h2>📕 Secure PDF Viewer</h2>
+    <div class="viewer" id="pdf-viewer">
+      <!-- यहाँ अपनी PDF pages की images लगाओ -->
+      <div style="position:relative; display:inline-block;">
+        <img src="page1.jpg" alt="Page 1">
+        <div class="watermark" id="wm1"></div>
+      </div>
+      <div style="position:relative; display:inline-block;">
+        <img src="page2.jpg" alt="Page 2">
+        <div class="watermark" id="wm2"></div>
+      </div>
+      <div style="position:relative; display:inline-block;">
+        <img src="page3.jpg" alt="Page 3">
+        <div class="watermark" id="wm3"></div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    /* ❌ Right Click Disable */
+    document.addEventListener("contextmenu", e => e.preventDefault());
+
+    /* ❌ Print + Shortcut Disable */
+    document.addEventListener("keydown", function(e) {
+      if (
+        (e.ctrlKey && (e.key === "p" || e.key === "s" || e.key === "u" || e.key === "c")) ||
+        e.key === "PrintScreen"
+      ) {
+        alert("🚫 Action Blocked!");
+        e.preventDefault();
+      }
+    });
+
+    /* ❌ Screenshot Detect */
+    window.addEventListener("keyup", function(e) {
+      if (e.key === "PrintScreen") {
+        document.body.innerHTML = "<h1 style='color:red;text-align:center;'>⚠ Screenshot Not Allowed ⚠</h1>";
+      }
+    });
+
+    /* Navigation Switch */
+    function showSection(id) {
+      document.querySelectorAll("section").forEach(sec => sec.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+    }
+
+    /* Dynamic Watermark */
+    const userName = "Rahul Sharma";   // <-- User का नाम
+    const userEmail = "rahul@example.com"; // <-- User का Email/ID
+    const watermarkText = `${userName} | ${userEmail}`;
+
+    document.querySelectorAll(".watermark").forEach(wm => {
+      wm.innerText = watermarkText;
+      wm.style.top = "50%";
+      wm.style.left = "20%";
+    });
+
+    /* Matrix Background Effect */
+    const canvas = document.getElementById("matrix");
+    const ctx = canvas.getContext("2d");
+
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    const letters = "01";
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+
+    const drops = [];
+    for (let x = 0; x < columns; x++) drops[x] = 1;
+
+    function draw() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#0F0";
+      ctx.font = fontSize + "px monospace";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975)
+          drops[i] = 0;
+
+        drops[i]++;
+      }
+    }
+
+    setInterval(draw, 33);
+  </script>
+</body>
+</html>
