@@ -19,6 +19,23 @@
       overflow-x: hidden;
     }
 
+    /* Keyframes */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideInRight {
+      from { right: -250px; }
+      to { right: 0; }
+    }
+
+    @keyframes glowPulse {
+      0% { box-shadow: 0 0 8px cyan; }
+      50% { box-shadow: 0 0 20px cyan; }
+      100% { box-shadow: 0 0 8px cyan; }
+    }
+
     /* Header */
     header {
       width: 100%;
@@ -31,46 +48,68 @@
       top: 0;
       left: 0;
       z-index: 1000;
+      box-shadow: 0 0 12px rgba(0,255,255,0.3);
+      animation: fadeIn 1s ease-in-out;
     }
 
     /* Left Menu Icon */
     .menu-toggle {
-      font-size: 28px;
+      font-size: 30px;
       color: cyan;
       cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .menu-toggle:hover {
+      transform: rotate(90deg);
+      color: yellow;
     }
 
     /* Logo + Name */
     .logo-section {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      animation: fadeIn 1.5s ease-in-out;
     }
 
     .logo-section img {
-      width: 40px;
-      height: 40px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
+      border: 2px solid cyan;
+      box-shadow: 0 0 10px cyan;
+      animation: glowPulse 2s infinite;
     }
 
     .logo-section span {
-      font-size: 20px;
+      font-size: 22px;
       font-weight: bold;
       color: #fff;
+      text-shadow: 0 0 8px #00ffe7;
+      transition: color 0.3s ease;
+    }
+    .logo-section span:hover {
+      color: yellow;
     }
 
     /* Profile */
     .profile-icon {
       background: yellow;
       color: #000;
-      font-size: 22px;
-      width: 35px;
-      height: 35px;
+      font-size: 24px;
+      width: 45px;
+      height: 45px;
       display: flex;
       justify-content: center;
       align-items: center;
       border-radius: 50%;
       cursor: pointer;
+      box-shadow: 0 0 8px yellow;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .profile-icon:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 16px orange;
     }
 
     /* Side Navigation */
@@ -88,6 +127,7 @@
 
     .side-menu.active {
       right: 0;
+      animation: slideInRight 0.5s ease;
     }
 
     .side-menu a {
@@ -97,37 +137,54 @@
       text-decoration: none;
       font-size: 18px;
       transition: 0.3s;
+      animation: fadeIn 1s ease forwards;
+      opacity: 0;
+    }
+    .side-menu.active a {
+      opacity: 1;
     }
 
     .side-menu a:hover {
       background: #0f0f0f;
       color: cyan;
+      text-shadow: 0 0 6px cyan;
+      transform: translateX(5px);
     }
 
     .close-btn {
       position: absolute;
       top: 15px;
       right: 20px;
-      font-size: 28px;
+      font-size: 30px;
       color: #fff;
       cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .close-btn:hover {
+      transform: rotate(90deg);
+      color: red;
     }
 
     /* Content placeholder */
     .hero {
-      margin-top: 80px;
+      margin-top: 100px;
       text-align: center;
-      padding: 50px 20px;
+      padding: 60px 20px;
+      animation: fadeIn 2s ease;
     }
 
     .hero h1 {
-      font-size: 40px;
+      font-size: 42px;
       color: cyan;
+      text-shadow: 0 0 12px cyan;
+      animation: fadeIn 2s ease-in-out;
     }
 
     .hero p {
       margin-top: 15px;
       color: #aaa;
+      font-size: 18px;
+      animation: fadeIn 2.5s ease-in-out;
     }
   </style>
 </head>
