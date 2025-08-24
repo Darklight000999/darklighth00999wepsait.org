@@ -2,402 +2,194 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>darklight000999</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Hacker Portal</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-
+    /* Reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      background: #000;
-      color: #00ffcc;
-      text-align: center;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
       overflow-x: hidden;
-      overflow-y: auto;
-      scroll-behavior: smooth;
+      background: #0d0d0d;
+      color: #fff;
     }
 
-    canvas#matrix {
+    /* Matrix Background */
+    #matrix {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       z-index: -1;
-      background: #000;
+      background: black;
     }
 
     /* Navbar */
     nav {
+      background: linear-gradient(90deg, #00c6ff, #0072ff, #00ff87);
+      padding: 15px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+      letter-spacing: 2px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.6);
       position: sticky;
       top: 0;
-      width: 100%;
-      background: rgba(0,0,0,0.8);
-      border-bottom: 2px solid #00ffaa;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      padding: 5px 15px;
-    }
-
-    .menu-toggle {
-      font-size: 28px;
-      color: #00ffaa;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 5px 10px;
-      margin-right: 10px;
-    }
-
-    .brand {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #00ffaa;
-      text-shadow: 0 0 10px #00ffaa, 0 0 20px #00ffcc, 0 0 30px #00ffaa;
-      animation: glow 2s infinite alternate;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      justify-content: center;
-      flex: 1;
-      margin: 0;
-    }
-    nav ul li {
-      margin: 5px 15px;
-    }
-    nav ul li a {
-      color: #00ffaa;
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
-    nav ul li a:hover {
-      color: #fff;
-      text-shadow: 0 0 10px #00ffaa, 0 0 20px #00ffcc;
+      z-index: 10;
+      text-shadow: 0 0 8px rgba(255,255,255,0.6);
     }
 
     /* Sidebar */
     .sidebar {
-      position: fixed;
-      top: 0;
-      left: -250px;
-      width: 250px;
       height: 100%;
-      background: rgba(0, 0, 0, 0.95);
-      border-right: 2px solid #00ffaa;
+      width: 0;
+      position: fixed;
+      top: 0; left: 0;
+      background: linear-gradient(180deg, #6a11cb, #2575fc);
+      overflow-x: hidden;
+      transition: 0.5s;
       padding-top: 60px;
-      transition: left 0.3s ease;
-      z-index: 2000;
-    }
-    .sidebar.active {
-      left: 0;
-    }
-    .sidebar ul {
-      flex-direction: column;
-      padding: 0;
-      text-align: left;
-    }
-    .sidebar ul li {
-      margin: 15px 0;
-      padding-left: 20px;
-    }
-    .sidebar ul li a {
-      font-size: 1.1rem;
+      z-index: 2;
+      box-shadow: 5px 0 20px rgba(0,0,0,0.7);
     }
 
-    .close-btn {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      font-size: 28px;
-      color: #00ffaa;
-      cursor: pointer;
-      background: none;
-      border: none;
-    }
-
-    @media (min-width: 769px) {
-      .menu-toggle {
-        display: none;
-      }
-      .sidebar {
-        display: none;
-      }
-      nav ul {
-        display: flex;
-      }
-    }
-
-    @media (max-width: 768px) {
-      nav ul {
-        display: none;
-      }
-    }
-
-    /* Logo */
-    .logo img {
-      margin: 30px auto;
-      width: 140px;
-      border-radius: 50%;
-      border: 3px solid #00ffcc;
-      box-shadow: 0 0 20px #00ffcc, 0 0 40px #00ffaa;
-      animation: pulse 3s infinite;
+    .sidebar a {
+      padding: 14px 25px;
+      text-decoration: none;
+      font-size: 18px;
+      color: #fff;
       display: block;
+      transition: 0.3s;
+      border-radius: 10px;
+      margin: 10px;
+    }
+    .sidebar a:hover {
+      background: rgba(255,255,255,0.15);
+      transform: translateX(8px);
     }
 
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-      100% { transform: scale(1); }
+    .openbtn {
+      font-size: 20px;
+      cursor: pointer;
+      background: linear-gradient(45deg, #00f260, #0575e6);
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 8px;
+      margin: 15px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+      transition: 0.3s;
+    }
+    .openbtn:hover { transform: scale(1.05); }
+
+    /* Content */
+    .content { padding: 20px; transition: margin-left 0.5s; }
+
+    .section {
+      margin: 30px 0;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      backdrop-filter: blur(8px);
     }
 
-    h1 {
-      font-size: 2.2rem;
-      text-shadow: 0 0 15px #00ffaa, 0 0 30px #00ffcc;
-      animation: glow 2s infinite alternate;
-      padding: 0 10px;
-    }
-
-    @keyframes glow {
-      from { text-shadow: 0 0 10px #00ffaa; }
-      to { text-shadow: 0 0 25px #00ffcc, 0 0 50px #00ffaa; }
-    }
+    #about { background: linear-gradient(135deg, rgba(0,255,255,0.15), rgba(0,128,255,0.15)); }
+    #gallery { background: linear-gradient(135deg, rgba(0,255,127,0.15), rgba(0,255,0,0.15)); }
+    #notes { background: linear-gradient(135deg, rgba(255,255,0,0.15), rgba(255,165,0,0.15)); }
+    #ehacking { background: linear-gradient(135deg, rgba(255,0,127,0.15), rgba(255,0,0,0.15)); }
+    #social { background: linear-gradient(135deg, rgba(0,127,255,0.15), rgba(127,0,255,0.15)); }
 
     h2 {
-      font-size: 1.3rem;
-      margin: 10px 0 30px;
-      color: #00ffaa;
-      padding: 0 10px;
-    }
-
-    /* About Section */
-    .about {
-      border: 2px solid #00ffcc;
-      border-radius: 15px;
-      margin: 20px auto;
-      padding: 15px;
-      width: 90%;
-      max-width: 800px;
-      background: rgba(0, 0, 0, 0.6);
-      box-shadow: 0 0 15px #00ffcc;
-      animation: fadeInUp 2s ease;
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(50px); }
-      to { opacity: 1; transform: translateY(0); }
+      margin-bottom: 15px;
+      font-size: 26px;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(255,255,255,0.6);
     }
 
     /* Gallery */
-    .gallery-section {
-      margin: 30px 0;
-    }
-
-    .gallery-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 15px;
-      padding: 0 15px;
-      animation: fadeIn 2.5s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .gallery-container a {
-      background: rgba(0, 255, 170, 0.1);
-      border: 2px solid #00ffaa;
-      border-radius: 15px;
-      padding: 8px;
-      text-decoration: none;
-      color: #00ffaa;
-      transition: all 0.4s ease;
-      box-shadow: 0 0 15px #00ffaa;
-      display: block;
-    }
-
-    .gallery-container a:hover {
-      background: #00ffaa;
-      color: #000;
-      transform: scale(1.05);
-      box-shadow: 0 0 25px #00ffaa, 0 0 50px #00ffcc;
-    }
-
-    .gallery-container img {
-      width: 100%;
-      border-radius: 10px;
-    }
-
-    /* Social Icons */
-    .social-section {
-      margin: 40px 0;
-      padding-top: 20px;
-      border-top: 2px solid #00ffcc;
-      animation: fadeInUp 2s ease;
-    }
-
-    .social-icons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-      padding: 0 10px;
-    }
-
-    .social-icons a img {
-      width: 140px;
-      border-radius: 10px;
+    .gallery img {
+      width: 260px;
+      height: 160px;
+      margin: 10px;
+      border-radius: 12px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.6);
       transition: transform 0.3s, box-shadow 0.3s;
     }
-
-    .social-icons a img:hover {
-      transform: scale(1.15);
-      box-shadow: 0 0 20px #00ffaa, 0 0 40px #00ffcc;
+    .gallery img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 5px 20px rgba(0,255,200,0.7);
     }
 
-    /* Footer */
-    footer {
-      margin-top: 30px;
-      padding: 15px;
-      font-size: 0.8rem;
-      color: #00ffaa;
-      border-top: 1px solid #00ffaa;
-      background: rgba(0, 0, 0, 0.6);
-    }
-
+    /* Links */
+    a { color: #00ffe0; text-decoration: none; }
+    a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
+
+  <!-- Matrix Background -->
   <canvas id="matrix"></canvas>
 
-  <!-- Navigation Menu -->
-  <nav>
-    <button class="menu-toggle">≡</button>
-    <span class="brand">darklight000999</span>
-    <ul>
-      <li><a href="#home">Home (link)</a></li>
-      <li><a href="#join">Join Class (link)</a></li>
-      <li><a href="your-pdf-link.pdf" target="_blank">PDF</a></li>
-      <li><a href="your-notes-link.html" target="_blank">Notes</a></li>
-      <li><a href="#ehacking">Ehacking (link)</a></li>
-      <li><a href="#services">Services & Support (link)</a></li>
-    </ul>
-  </nav>
+  <!-- Navbar -->
+  <nav>⚡ Modern Hacker Portal</nav>
+  <button class="openbtn" onclick="openNav()">☰ Menu</button>
 
   <!-- Sidebar -->
-  <div class="sidebar" id="sidebar">
-    <button class="close-btn">×</button>
-    <ul>
-      <li><a href="#home">Home (link)</a></li>
-      <li><a href="#join">Join Class (link)</a></li>
-      <li><a href="your-pdf-link.pdf" target="_blank">PDF</a></li>
-      <li><a href="your-notes-link.html" target="_blank">Notes</a></li>
-      <li><a href="#ehacking">Ehacking (link)</a></li>
-      <li><a href="#services">Services & Support (link)</a></li>
-    </ul>
+  <div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" onclick="closeNav()">❌ Close</a>
+    <a href="#about">About</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#notes">Notes</a>
+    <a href="#ehacking">Ehacking</a>
+    <a href="#social">Social</a>
   </div>
 
-  <div id="home" class="logo">
-    <img src="20250505_052934.png" alt="darklight Logo">
+  <!-- Main Content -->
+  <div id="main" class="content">
+    <section id="about" class="section">
+      <h2>About</h2>
+      <p>यह वेबसाइट हैकिंग, साइबर सिक्योरिटी और लर्निंग resources को Modern और Professional थीम के साथ दिखाती है।</p>
+    </section>
+
+    <section id="gallery" class="section gallery">
+      <h2>Gallery</h2>
+      <img src="images/hacker1.jpg" alt="Hacker Image 1">
+      <img src="images/hacker2.jpg" alt="Hacker Image 2">
+    </section>
+
+    <section id="notes" class="section">
+      <h2>Notes</h2>
+      <p>यहाँ आप अपने hacking notes और learning materials जोड़ सकते हैं।</p>
+    </section>
+
+    <section id="ehacking" class="section">
+      <h2>Ehacking</h2>
+      <p>Ehacking tutorials, tools और resources यहाँ available होंगे।</p>
+    </section>
+
+    <section id="social" class="section">
+      <h2>Social</h2>
+      <p>हमसे जुड़ें: 
+        <a href="#">Facebook</a> | 
+        <a href="#">Twitter</a> | 
+        <a href="#">Instagram</a>
+      </p>
+    </section>
   </div>
 
-  <h1>darklight000999</h1>
-  <h2>Ethical Hacking & Cyber Security</h2>
+  <!-- Sidebar Script -->
+  <script>
+    function openNav() {
+      document.getElementById("mySidebar").style.width = "260px";
+      document.getElementById("main").style.marginLeft = "260px";
+    }
+    function closeNav() {
+      document.getElementById("mySidebar").style.width = "0";
+      document.getElementById("main").style.marginLeft= "0";
+    }
+  </script>
 
-  <!-- About Us Section -->
-  <div id="join" class="about">
-    <h2>About Us</h2>
-    <p>
-      Welcome to <b>darklight000999</b>. We specialize in ethical hacking, cybersecurity training,
-      and providing secure solutions to protect digital identities and systems from vulnerabilities.
-    </p>
-  </div>
-
-  <!-- Gallery -->
-  <div id="pdf" class="gallery-section">
-    <h2>Gallery</h2>
-    <div class="gallery-container">
-      <a href="images/hacker1.jpg" target="_blank">
-        <img src="images/hacker1.jpg" alt="Hacker Image 1">
-        <p>Hacker Image 1</p>
-      </a>
-
-      <a href="images/hacker2.jpg" target="_blank">
-        <img src="images/hacker2.jpg" alt="Hacker Image 2">
-        <p>Hacker Image 2</p>
-      </a>
-
-      <a href="images/hacker3.jpg" target="_blank">
-        <img src="images/hacker3.jpg" alt="Hacker Image 3">
-        <p>Hacker Image 3</p>
-      </a>
-    </div>
-  </div>
-
-  <!-- Notes Section -->
-  <div id="notes" class="about">
-    <h2>Notes</h2>
-    <p>Here you can attach PDF notes, important hacking commands and resources.</p>
-  </div>
-
-  <!-- Ehacking Section -->
-  <div id="ehacking" class="about">
-    <h2>Ehacking</h2>
-    <p>Dedicated section for ethical hacking tutorials, tools, and labs.</p>
-  </div>
-
-  <!-- Social Media Section -->
-  <div id="services" class="social-section">
-    <h2>Follow Us</h2>
-    <div class="social-icons">
-<p align="center">
-  <a href="https://www.instagram.com/darklight000999_?igsh=cmEwN3htaTRodzl3">
-    <img src="https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=instagram&logoColor=white" />
-  </a>
-  
-  <a href="https://t.me/darklight000999">
-    <img src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" />
-  </a>
-  
-  <a href="https://chat.whatsapp.com/KALyrkZm2ru2xiTY9u0Tc0?mode=ac_t">
-    <img src="https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" />
-  </a>
-  
-  <a href="https://www.facebook.com/darklight000999">
-    <img src="https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white" />
-  </a>
-  
-  <a href="https://youtube.com/@mr_br_hacker_33?si=IBcIbcrVE1Xur_vL">
-    <img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" />
-  </a>
-  
-  <a href="https://github.com/Darklight000999">
-    <img src="https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white" />
-  </a>
-  
-  <a href="https://share.google/BIo6sUsdFCFMMkc0z">
-    <img src="https://img.shields.io/badge/Google%20Business-4285F4?style=for-the-badge&logo=google&logoColor=white" />
-  </a>
-</p>
-      </a>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer>
-    <p>© 2025 darklight000999 | All Rights Reserved</p>
-  </footer>
-
-  <!-- Hyper Realistic Matrix Background -->
+  <!-- Matrix Effect -->
   <script>
     const canvas = document.getElementById("matrix");
     const ctx = canvas.getContext("2d");
@@ -409,8 +201,7 @@
     window.addEventListener("resize", resizeCanvas);
     resizeCanvas();
 
-    // Characters pool with 🔓 and 🔒
-    const letters = "HACKER¥₿§©ΔΩΞΨЖШ.⚷ꗃ.ꗃ";
+    const letters = "01@#$%&*+=<>?/\\|{}[]¥₿§ΔΩΞΨЖШ🔓🔒";
     const fontSize = 18;
     let columns = Math.floor(canvas.width / fontSize);
     const drops = Array(columns).fill(1);
@@ -423,10 +214,11 @@
 
       for (let i = 0; i < drops.length; i++) {
         const text = letters[Math.floor(Math.random() * letters.length)];
-        const colors = ["#00ff00", "#ffffff", "#00aaff", "#ff0033"];
-        ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
 
-        ctx.shadowBlur = 25;
+        // Multicolor glowing
+        const colors = ["#00ff00", "#ffffff", "#00aaff", "#ff0033", "#39ff14", "#ffcc00"];
+        ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
+        ctx.shadowBlur = 20;
         ctx.shadowColor = ctx.fillStyle;
 
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
@@ -437,34 +229,14 @@
         drops[i]++;
       }
 
-      // Random glitch scanlines
-      if (Math.random() > 0.92) {
-        ctx.fillStyle = "rgba(0, 255, 0, 0.15)";
+      // Subtle glitch
+      if (Math.random() > 0.985) {
+        ctx.fillStyle = "rgba(255, 255, 255, 0.1)";
         ctx.fillRect(0, Math.random() * canvas.height, canvas.width, 2);
       }
     }
 
-    setInterval(draw, 35);
-
-    // Sidebar Toggle
-    const menuToggle = document.querySelector('.menu-toggle');
-    const sidebar = document.getElementById('sidebar');
-    const closeBtn = document.querySelector('.close-btn');
-
-    menuToggle.addEventListener('click', () => {
-      sidebar.classList.add('active');
-    });
-
-    closeBtn.addEventListener('click', () => {
-      sidebar.classList.remove('active');
-    });
-
-    window.addEventListener('click', (e) => {
-      if (e.target !== sidebar && !sidebar.contains(e.target) && e.target !== menuToggle) {
-        sidebar.classList.remove('active');
-      }
-    });
+    setInterval(draw, 40);
   </script>
-
 </body>
 </html>
