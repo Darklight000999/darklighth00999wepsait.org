@@ -6,11 +6,10 @@
   <title>Darklight Cyber Security</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    /* Reset */
-    * {margin:0;padding:0;box-sizing:border-box;font-family: 'Segoe UI',sans-serif;}
-
     body {
-      background: #0a0a0a;
+      margin: 0;
+      background: #000;
+      font-family: 'Segoe UI', sans-serif;
       color: #fff;
     }
 
@@ -20,55 +19,79 @@
       align-items: center;
       justify-content: space-between;
       background: #111;
-      padding: 12px 20px;
+      padding: 10px 20px;
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       z-index: 1000;
+      box-shadow: 0 0 15px rgba(0,255,231,0.3);
     }
-    header .logo {
+
+    /* Left Menu Button */
+    .menu-btn {
+      font-size: 28px;
+      cursor: pointer;
+      color: #00ffe7; /* neon cyan */
+      transition: 0.3s;
+    }
+    .menu-btn:hover {
+      color: #39ff14; /* neon green */
+      text-shadow: 0 0 8px #39ff14;
+    }
+
+    /* Center Logo + Name */
+    .center {
       display: flex;
       align-items: center;
       gap: 10px;
     }
-    header .logo img {
-      height: 40px;
+    .center img {
+      height: 45px;
+      width: 45px;
+      border-radius: 50%;
+      border: 2px solid #00ffe7;
+      box-shadow: 0 0 8px #00ffe7;
     }
-    header .logo span {
-      font-size: 20px;
+    .center span {
+      font-size: 22px;
       font-weight: bold;
       color: #fff;
+      text-shadow: 0 0 6px #9d00ff;
     }
 
-    /* Menu Button */
-    .menu-btn {
-      font-size: 26px;
-      cursor: pointer;
-      color: #00ff99;
-      margin-right: auto;
-      margin-left: 15px;
-    }
-
-    /* Profile */
+    /* Right Profile */
     .profile {
-      font-size: 26px;
-      color: #ffde59;
+      background: #f5ff00;
+      color: #000;
+      font-size: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
+      transition: 0.3s;
+    }
+    .profile:hover {
+      background: #39ff14;
+      color: #000;
+      box-shadow: 0 0 12px #39ff14;
     }
 
     /* Side Menu */
     .side-menu {
       position: fixed;
       top: 0;
-      right: -260px;
-      width: 260px;
+      right: -270px;
+      width: 270px;
       height: 100%;
       background: #111;
-      box-shadow: -2px 0 8px rgba(0,0,0,0.7);
       transition: 0.4s;
-      padding: 60px 20px;
+      padding: 60px 25px;
       z-index: 2000;
+      box-shadow: -4px 0 12px rgba(0,255,231,0.3);
     }
     .side-menu.active {
       right: 0;
@@ -77,12 +100,13 @@
       display: block;
       color: #fff;
       text-decoration: none;
-      margin: 18px 0;
+      margin: 20px 0;
       font-size: 18px;
       transition: 0.3s;
     }
     .side-menu a:hover {
-      color: #00ff99;
+      color: #00ffe7;
+      text-shadow: 0 0 8px #00ffe7;
     }
     .side-menu .close {
       position: absolute;
@@ -92,132 +116,23 @@
       cursor: pointer;
       color: #fff;
     }
-
-    /* Hero Section */
-    .hero {
-      height: 100vh;
-      background: url('https://img.freepik.com/free-photo/futuristic-hacker-background-with-binary-code_23-2148503783.jpg') no-repeat center/cover;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 0 20px;
-    }
-    .hero h1 {
-      font-size: 40px;
-      color: #00ff99;
-      text-shadow: 0 0 10px #00ff99;
-    }
-    .hero p {
-      margin-top: 15px;
-      font-size: 18px;
-      color: #ddd;
-    }
-
-    /* Gallery */
-    .gallery {
-      padding: 60px 20px;
-      text-align: center;
-    }
-    .gallery h2 {
-      font-size: 28px;
-      color: #00ff99;
-      margin-bottom: 20px;
-    }
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-      gap: 20px;
-    }
-    .gallery-grid img {
-      width: 100%;
-      border-radius: 8px;
-      transition: 0.3s;
-    }
-    .gallery-grid img:hover {
-      transform: scale(1.05);
-    }
-
-    /* Notes & Hacking Section */
-    .notes {
-      padding: 60px 20px;
-      background: #111;
-    }
-    .notes h2 {
-      font-size: 28px;
-      color: #00ff99;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-    .card-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-      gap: 20px;
-    }
-    .card {
-      background: #1a1a1a;
-      padding: 20px;
-      border-radius: 8px;
-      transition: 0.3s;
-    }
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 15px #00ff99;
-    }
-    .card h3 {
-      margin-bottom: 10px;
-      color: #00ff99;
-    }
-    .card p {
-      color: #ccc;
-      font-size: 14px;
-    }
-
-    /* Social Media */
-    .social {
-      text-align: center;
-      padding: 50px 20px;
-    }
-    .social h2 {
-      color: #00ff99;
-      margin-bottom: 20px;
-    }
-    .social-links a {
-      margin: 10px;
-      display: inline-block;
-      font-size: 26px;
-      color: #fff;
-      transition: 0.3s;
-    }
-    .social-links a:hover {
-      color: #00ff99;
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #0a0a0a;
-      color: #666;
-      font-size: 14px;
-    }
-
-    /* Responsive */
-    @media(max-width:600px){
-      .hero h1 {font-size: 28px;}
-    }
   </style>
 </head>
 <body>
 
   <!-- Navbar -->
   <header>
-    <div class="logo">
+    <!-- Left Menu -->
+    <div class="menu-btn"><i class="fas fa-bars"></i></div>
+
+    <!-- Center Logo + Name -->
+    <div class="center">
       <img src="https://raw.githubusercontent.com/Darklight000999/darklighth00999wepsait.org/main/20250505_052934.png" alt="Logo">
       <span>darklight000999</span>
     </div>
-    <div class="menu-btn"><i class="fas fa-bars"></i></div>
-    <div class="profile"><i class="fas fa-user-circle"></i></div>
+
+    <!-- Right Profile -->
+    <div class="profile"><i class="fas fa-user"></i></div>
   </header>
 
   <!-- Side Menu -->
@@ -230,63 +145,6 @@
     <a href="#contact">Contact</a>
   </div>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div>
-      <h1>Cyber Security & Ethical Hacking Agency</h1>
-      <p>Protecting the digital world with next-gen solutions</p>
-    </div>
-  </section>
-
-  <!-- Gallery -->
-  <section class="gallery" id="gallery">
-    <h2>Our Work</h2>
-    <div class="gallery-grid">
-      <img src="https://img.freepik.com/free-photo/hacker-using-computer-security-breach_53876-103595.jpg" alt="Cyber Security">
-      <img src="https://img.freepik.com/free-photo/digital-lock-digital-cyber-space_53876-111504.jpg" alt="Security">
-      <img src="https://img.freepik.com/free-photo/futuristic-hud-interface_53876-104621.jpg" alt="Hacking">
-      <img src="https://img.freepik.com/free-photo/programming-background-with-person-working-html_23-2150038842.jpg" alt="Ethical Hacking">
-    </div>
-  </section>
-
-  <!-- Notes -->
-  <section class="notes" id="notes">
-    <h2>Notes & Research</h2>
-    <div class="card-container">
-      <div class="card">
-        <h3>Penetration Testing</h3>
-        <p>We provide advanced penetration testing to secure your applications and networks.</p>
-      </div>
-      <div class="card">
-        <h3>Cyber Threat Analysis</h3>
-        <p>Our experts monitor global threats and give real-time solutions.</p>
-      </div>
-      <div class="card">
-        <h3>Ethical Hacking Training</h3>
-        <p>We train individuals and organizations to protect themselves from hackers.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Social Media -->
-  <section class="social" id="social">
-    <h2>Connect With Us</h2>
-    <div class="social-links">
-      <a href="https://www.instagram.com/darklight000999_" target="_blank"><i class="fab fa-instagram" style="color:#E4405F;"></i></a>
-      <a href="https://t.me/darklight000999" target="_blank"><i class="fab fa-telegram" style="color:#2CA5E0;"></i></a>
-      <a href="https://chat.whatsapp.com/KALyrkZm2ru2xiTY9u0Tc0" target="_blank"><i class="fab fa-whatsapp" style="color:#25D366;"></i></a>
-      <a href="https://www.facebook.com/darklight000999" target="_blank"><i class="fab fa-facebook" style="color:#1877F2;"></i></a>
-      <a href="https://youtube.com/@mr_br_hacker_33" target="_blank"><i class="fab fa-youtube" style="color:#FF0000;"></i></a>
-      <a href="https://github.com/Darklight000999" target="_blank"><i class="fab fa-github" style="color:#fff;"></i></a>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>© 2025 Darklight Cyber Security Agency | All Rights Reserved</p>
-  </footer>
-
-  <!-- Script -->
   <script>
     const menuBtn = document.querySelector('.menu-btn');
     const sideMenu = document.getElementById('sideMenu');
@@ -296,5 +154,6 @@
       sideMenu.classList.toggle('active');
     }
   </script>
+
 </body>
 </html>
