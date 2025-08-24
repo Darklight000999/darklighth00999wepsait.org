@@ -3,120 +3,82 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Darklight00999 - Modern Hacker Portal</title>
+  <title>Darklight000999 - Modern Hacker Portal</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Segoe UI', Tahoma, sans-serif;
-      overflow-x: hidden;
-      background: #0d0d0d;
+      background: #000;
       color: #fff;
+      overflow-x: hidden;
     }
-
-    /* Matrix Background */
     #matrix {
-      position: fixed;
-      top: 0; left: 0;
+      position: fixed; top: 0; left: 0;
       width: 100%; height: 100%;
-      z-index: -1;
-      background: black;
+      z-index: -1; background: black;
     }
-
-    /* Navbar */
     nav {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
+      display: flex; align-items: center; gap: 12px;
       background: linear-gradient(90deg, #00c6ff, #0072ff, #00ff87);
-      padding: 15px;
-      font-size: 22px;
-      font-weight: bold;
-      color: white;
-      letter-spacing: 2px;
-      box-shadow: 0 3px 15px rgba(0,0,0,0.6);
-      position: sticky;
-      top: 0;
-      z-index: 10;
+      padding: 15px; font-size: 22px; font-weight: bold;
+      color: #fff; letter-spacing: 2px;
       text-shadow: 0 0 8px rgba(255,255,255,0.6);
+      position: sticky; top: 0; z-index: 10;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.6);
     }
     nav img {
-      height: 32px;
-      width: 32px;
-      border-radius: 50%;
+      height: 40px; width: 40px;
+      border-radius: 50%; object-fit: contain;
     }
-
-    /* Sidebar */
+    .openbtn {
+      font-size: 20px; cursor: pointer;
+      background: linear-gradient(45deg, #00f260, #0575e6);
+      color: #fff; padding: 10px 15px;
+      border: none; border-radius: 8px;
+      margin: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+      transition: transform 0.3s;
+    }
+    .openbtn:hover { transform: scale(1.05); }
     .sidebar {
-      height: 100%;
-      width: 0;
-      position: fixed;
-      top: 0; left: 0;
+      height: 100%; width: 0; position: fixed; top: 0; left: 0;
       background: linear-gradient(180deg, #6a11cb, #2575fc);
-      overflow-x: hidden;
-      transition: 0.5s;
-      padding-top: 60px;
-      z-index: 2;
+      overflow-x: hidden; transition: width 0.5s;
+      padding-top: 60px; z-index: 2;
       box-shadow: 5px 0 20px rgba(0,0,0,0.7);
     }
     .sidebar a {
-      padding: 14px 25px;
-      text-decoration: none;
-      font-size: 18px;
-      color: #fff;
-      display: block;
-      transition: 0.3s;
+      display: block; padding: 14px 25px;
+      margin: 10px; font-size: 18px;
+      color: #fff; text-decoration: none;
       border-radius: 10px;
-      margin: 10px;
+      transition: background 0.3s, transform 0.3s;
     }
     .sidebar a:hover {
       background: rgba(255,255,255,0.15);
       transform: translateX(8px);
     }
-
-    .openbtn {
-      font-size: 20px;
-      cursor: pointer;
-      background: linear-gradient(45deg, #00f260, #0575e6);
-      color: white;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 8px;
-      margin: 15px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
-      transition: 0.3s;
+    .content {
+      padding: 20px; transition: margin-left 0.5s;
     }
-    .openbtn:hover { transform: scale(1.05); }
-
-    /* Content */
-    .content { padding: 20px; transition: margin-left 0.5s; }
-
     .section {
-      margin: 30px 0;
-      padding: 25px;
+      margin: 30px 0; padding: 25px;
       border-radius: 15px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-      backdrop-filter: blur(4px);
     }
-
-    #about { background: linear-gradient(135deg, rgba(0,255,255,0.2), rgba(0,128,255,0.2)); }
-    #gallery { background: linear-gradient(135deg, rgba(0,255,127,0.2), rgba(0,255,0,0.2)); }
-    #notes { background: linear-gradient(135deg, rgba(255,255,0,0.2), rgba(255,165,0,0.2)); }
-    #ehacking { background: linear-gradient(135deg, rgba(255,0,127,0.2), rgba(255,0,0,0.2)); }
-    #social { background: linear-gradient(135deg, rgba(0,127,255,0.2), rgba(127,0,255,0.2)); }
-
+    /* Solid theme backgrounds */
+    #about { background: #009688; }
+    #gallery { background: #4CAF50; }
+    #notes { background: #FFC107; color: #000; }
+    #ehacking { background: #E91E63; }
+    #social { background: #3F51B5; }
     h2 {
-      margin-bottom: 15px;
-      font-size: 26px;
-      color: #fff;
-      text-shadow: 0 0 10px rgba(255,255,255,0.6);
+      font-size: 26px; margin-bottom: 15px;
+      color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.6);
     }
-
+    #notes h2 { color: #000; } /* Notes section text black */
     .gallery img {
-      width: 260px;
-      height: 160px;
-      margin: 10px;
-      border-radius: 12px;
+      width: 260px; height: 160px;
+      margin: 10px; border-radius: 12px;
       box-shadow: 0 3px 12px rgba(0,0,0,0.6);
       transition: transform 0.3s, box-shadow 0.3s;
     }
@@ -124,24 +86,20 @@
       transform: scale(1.1);
       box-shadow: 0 5px 20px rgba(0,255,200,0.7);
     }
-
     a { color: #00ffe0; text-decoration: none; }
     a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
 
-  <!-- Matrix Background -->
   <canvas id="matrix"></canvas>
 
-  <!-- Navbar with logo -->
   <nav>
-    <img src="https://i.ibb.co/8jV2rCq/logo.png" alt="Logo">
-    <span>darklight00999</span>
+    <img src="https://raw.githubusercontent.com/Darklight000999/darklighth00999wepsait.org/main/20250505_052934.png" alt="darklight Logo" />
+    <span>darklight000999</span>
   </nav>
   <button class="openbtn" onclick="openNav()">☰ Menu</button>
 
-  <!-- Sidebar -->
   <div id="mySidebar" class="sidebar">
     <a href="javascript:void(0)" onclick="closeNav()">❌ Close</a>
     <a href="#about">About</a>
@@ -151,40 +109,25 @@
     <a href="#social">Social</a>
   </div>
 
-  <!-- Main Content -->
   <div id="main" class="content">
-    <section id="about" class="section">
-      <h2>About</h2>
+    <section id="about" class="section"><h2>About</h2>
       <p>यह वेबसाइट हैकिंग, साइबर सिक्योरिटी और लर्निंग resources को Modern और Professional थीम के साथ दिखाती है।</p>
     </section>
-
-    <section id="gallery" class="section gallery">
-      <h2>Gallery</h2>
-      <img src="images/hacker1.jpg" alt="Hacker Image 1">
-      <img src="images/hacker2.jpg" alt="Hacker Image 2">
+    <section id="gallery" class="section gallery"><h2>Gallery</h2>
+      <img src="images/hacker1.jpg" alt="Hacker Image 1" />
+      <img src="images/hacker2.jpg" alt="Hacker Image 2" />
     </section>
-
-    <section id="notes" class="section">
-      <h2>Notes</h2>
+    <section id="notes" class="section"><h2>Notes</h2>
       <p>यहाँ आप अपने hacking notes और learning materials जोड़ सकते हैं।</p>
     </section>
-
-    <section id="ehacking" class="section">
-      <h2>Ehacking</h2>
+    <section id="ehacking" class="section"><h2>Ehacking</h2>
       <p>Ehacking tutorials, tools और resources यहाँ available होंगे।</p>
     </section>
-
-    <section id="social" class="section">
-      <h2>Social</h2>
-      <p>हमसे जुड़ें: 
-        <a href="#">Facebook</a> | 
-        <a href="#">Twitter</a> | 
-        <a href="#">Instagram</a>
-      </p>
+    <section id="social" class="section"><h2>Social</h2>
+      <p>हमसे जुड़ें: <a href="#">Facebook</a> | <a href="#">Twitter</a> | <a href="#">Instagram</a></p>
     </section>
   </div>
 
-  <!-- Sidebar Script -->
   <script>
     function openNav() {
       document.getElementById("mySidebar").style.width = "260px";
@@ -192,50 +135,36 @@
     }
     function closeNav() {
       document.getElementById("mySidebar").style.width = "0";
-      document.getElementById("main").style.marginLeft= "0";
+      document.getElementById("main").style.marginLeft = "0";
     }
   </script>
 
-  <!-- Matrix Effect (No Glitch) -->
   <script>
     const canvas = document.getElementById("matrix");
     const ctx = canvas.getContext("2d");
-
     function resizeCanvas() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     }
     window.addEventListener("resize", resizeCanvas);
     resizeCanvas();
-
-    const letters = "01@#$%&*+=<>?/\\|{}[]¥₿§ΔΩΞΨЖШ🔓🔒";
+    const chars = "01@#$%&*+=<>?/\\|{}[]";
     const fontSize = 18;
-    let columns = Math.floor(canvas.width / fontSize);
+    const columns = Math.floor(canvas.width / fontSize);
     const drops = Array(columns).fill(1);
-
     function draw() {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.15)";
+      ctx.fillStyle = "rgba(0,0,0,0.25)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-
       ctx.font = fontSize + "px monospace";
-
       for (let i = 0; i < drops.length; i++) {
-        const text = letters[Math.floor(Math.random() * letters.length)];
-
-        const colors = ["#00ff00", "#ffffff", "#00aaff", "#ff0033", "#39ff14", "#ffcc00"];
+        const text = chars[Math.floor(Math.random() * chars.length)];
+        const colors = ["#00ff00", "#00ffff", "#ff0033", "#39ff14", "#ffcc00"];
         ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
-        ctx.shadowBlur = 15;
-        ctx.shadowColor = ctx.fillStyle;
-
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
         drops[i]++;
       }
     }
-
     setInterval(draw, 40);
   </script>
 </body>
