@@ -3,157 +3,172 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Darklight000999</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <title>darklight000999</title>
   <style>
-    body {
+    /* Reset */
+    * {
       margin: 0;
-      background: #000;
-      font-family: 'Segoe UI', sans-serif;
-      color: #fff;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
     }
 
-    /* Navbar */
+    body {
+      background-color: #0a0a0a;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* Header */
     header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      width: 100%;
       background: #111;
-      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
       z-index: 1000;
-      box-shadow: 0 0 15px rgba(0,255,231,0.3);
     }
 
-    /* Left Menu Button */
-    .menu-btn {
+    /* Left Menu Icon */
+    .menu-toggle {
       font-size: 28px;
+      color: cyan;
       cursor: pointer;
-      color: #00ffe7; /* neon cyan */
-      transition: 0.3s;
-    }
-    .menu-btn:hover {
-      color: #39ff14; /* neon green */
-      text-shadow: 0 0 8px #39ff14;
     }
 
-    /* Center Logo + Name */
-    .center {
+    /* Logo + Name */
+    .logo-section {
       display: flex;
       align-items: center;
       gap: 10px;
     }
-    .center img {
-      height: 45px;
-      width: 45px;
-      border-radius: 50%;
-      border: 2px solid #00ffe7;
-      box-shadow: 0 0 8px #00ffe7;
-    }
-    .center span {
-      font-size: 22px;
-      font-weight: bold;
-      color: #fff;
-      text-shadow: 0 0 6px #9d00ff;
-    }
 
-    /* Right Profile */
-    .profile {
-      background: #f5ff00;
-      color: #000;
-      font-size: 20px;
+    .logo-section img {
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .profile:hover {
-      background: #39ff14;
-      color: #000;
-      box-shadow: 0 0 12px #39ff14;
     }
 
-    /* Side Menu */
+    .logo-section span {
+      font-size: 20px;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    /* Profile */
+    .profile-icon {
+      background: yellow;
+      color: #000;
+      font-size: 22px;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    /* Side Navigation */
     .side-menu {
       position: fixed;
       top: 0;
-      right: -270px;
-      width: 270px;
+      right: -250px;
+      width: 250px;
       height: 100%;
       background: #111;
-      transition: 0.4s;
-      padding: 60px 25px;
+      transition: 0.3s ease;
+      padding-top: 60px;
       z-index: 2000;
-      box-shadow: -4px 0 12px rgba(0,255,231,0.3);
     }
+
     .side-menu.active {
       right: 0;
     }
+
     .side-menu a {
       display: block;
       color: #fff;
+      padding: 15px 20px;
       text-decoration: none;
-      margin: 20px 0;
       font-size: 18px;
       transition: 0.3s;
     }
+
     .side-menu a:hover {
-      color: #00ffe7;
-      text-shadow: 0 0 8px #00ffe7;
+      background: #0f0f0f;
+      color: cyan;
     }
-    .side-menu .close {
+
+    .close-btn {
       position: absolute;
       top: 15px;
       right: 20px;
       font-size: 28px;
-      cursor: pointer;
       color: #fff;
+      cursor: pointer;
+    }
+
+    /* Content placeholder */
+    .hero {
+      margin-top: 80px;
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .hero h1 {
+      font-size: 40px;
+      color: cyan;
+    }
+
+    .hero p {
+      margin-top: 15px;
+      color: #aaa;
     }
   </style>
 </head>
 <body>
-
-  <!-- Navbar -->
+  <!-- Header -->
   <header>
-    <!-- Left Menu -->
-    <div class="menu-btn"><i class="fas fa-bars"></i></div>
+    <div class="menu-toggle" onclick="openMenu()">☰</div>
 
-    <!-- Center Logo + Name -->
-    <div class="center">
-      <img src="https://raw.githubusercontent.com/Darklight000999/darklighth00999wepsait.org/main/20250505_052934.png" alt="Logo">
+    <div class="logo-section">
+      <img src="https://i.ibb.co/Qn6QFZ3/hacker-logo.png" alt="Logo">
       <span>darklight000999</span>
     </div>
 
-    <!-- Right Profile -->
-    <div class="profile"><i class="fas fa-user"></i></div>
+    <div class="profile-icon">👤</div>
   </header>
 
   <!-- Side Menu -->
   <div class="side-menu" id="sideMenu">
-    <span class="close" onclick="toggleMenu()">&times;</span>
+    <span class="close-btn" onclick="closeMenu()">×</span>
     <a href="#">Home</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#notes">Notes</a>
-    <a href="#social">Social Media</a>
-    <a href="#contact">Contact</a>
+    <a href="#">About</a>
+    <a href="#">Cyber Security</a>
+    <a href="#">Ethical Hacking</a>
+    <a href="#">Gallery</a>
+    <a href="#">Notes</a>
+    <a href="#">Contact</a>
   </div>
 
-  <script>
-    const menuBtn = document.querySelector('.menu-btn');
-    const sideMenu = document.getElementById('sideMenu');
-    menuBtn.addEventListener('click', toggleMenu);
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Welcome to Darklight Cyber Security</h1>
+    <p>Professional Cyber Security & Ethical Hacking Services</p>
+  </section>
 
-    function toggleMenu() {
-      sideMenu.classList.toggle('active');
+  <script>
+    function openMenu() {
+      document.getElementById("sideMenu").classList.add("active");
+    }
+    function closeMenu() {
+      document.getElementById("sideMenu").classList.remove("active");
     }
   </script>
-
 </body>
 </html>
