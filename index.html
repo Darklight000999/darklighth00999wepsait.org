@@ -3,200 +3,220 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Darklight000999 - Modern Hacker Portal</title>
+  <title>Darklight000999</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* ========== RESET ========== */
+    * {margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif;}
+
     body {
-      font-family: 'Segoe UI', Tahoma, sans-serif;
-      background: #000;
+      background: linear-gradient(135deg, #1e1e2f, #121212, #2c003e);
       color: #fff;
-      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
-    #matrix {
-      position: fixed; top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: -1; background: black;
-    }
+
+    /* ========== NAVBAR ========== */
     nav {
-      display: flex; align-items: center; gap: 12px;
-      background: linear-gradient(90deg, #00c6ff, #0072ff, #00ff87);
-      padding: 15px; font-size: 22px; font-weight: bold;
-      color: #fff; letter-spacing: 2px;
-      text-shadow: 0 0 8px rgba(255,255,255,0.6);
-      position: sticky; top: 0; z-index: 10;
-      box-shadow: 0 3px 15px rgba(0,0,0,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #0f0f1a;
+      padding: 10px 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
+
     nav img {
-      height: 40px; width: 40px;
-      border-radius: 50%; object-fit: contain;
+      height: 45px;
+      margin-right: 10px;
     }
-    .openbtn {
-      font-size: 20px; cursor: pointer;
-      background: linear-gradient(45deg, #00f260, #0575e6);
-      color: #fff; padding: 10px 15px;
-      border: none; border-radius: 8px;
-      margin: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+
+    nav span {
+      font-size: 1.4em;
+      font-weight: bold;
+      background: linear-gradient(45deg, #00ffcc, #ff00ff);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .menu {
+      display: flex;
+      gap: 20px;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .menu a:hover {
+      color: #00ffcc;
+    }
+
+    /* ========== SECTION STYLING ========== */
+    section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    section h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
+      color: #ff00cc;
+    }
+
+    section p {
+      max-width: 800px;
+      margin: auto;
+      line-height: 1.6;
+    }
+
+    /* ========== GALLERY ========== */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
       transition: transform 0.3s;
     }
-    .openbtn:hover { transform: scale(1.05); }
-    .sidebar {
-      height: 100%; width: 0; position: fixed; top: 0; left: 0;
-      background: linear-gradient(180deg, #6a11cb, #2575fc);
-      overflow-x: hidden; transition: width 0.5s;
-      padding-top: 60px; z-index: 2;
-      box-shadow: 5px 0 20px rgba(0,0,0,0.7);
-    }
-    .sidebar a {
-      display: block; padding: 14px 25px;
-      margin: 10px; font-size: 18px;
-      color: #fff; text-decoration: none;
-      border-radius: 10px;
-      transition: background 0.3s, transform 0.3s;
-    }
-    .sidebar a:hover {
-      background: rgba(255,255,255,0.15);
-      transform: translateX(8px);
-    }
-    .content {
-      padding: 20px; transition: margin-left 0.5s;
-    }
-    .section {
-      margin: 30px 0; padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-    }
-    /* Solid theme backgrounds */
-    #about { background: #009688; }
-    #gallery { background: #4CAF50; }
-    #notes { background: #FFC107; color: #000; }
-    #ehacking { background: #E91E63; }
-    #social { background: #3F51B5; }
-    h2 {
-      font-size: 26px; margin-bottom: 15px;
-      color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.6);
-    }
-    #notes h2 { color: #000; } /* Notes section text black */
-    .gallery img {
-      width: 260px; height: 160px;
-      margin: 10px; border-radius: 12px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.6);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
+
     .gallery img:hover {
-      transform: scale(1.1);
-      box-shadow: 0 5px 20px rgba(0,255,200,0.7);
+      transform: scale(1.05);
     }
-    a { color: #00ffe0; text-decoration: none; }
-    a:hover { text-decoration: underline; }
+
+    /* ========== FOOTER ========== */
+    footer {
+      margin-top: auto;
+      background: #0d0d16;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 -4px 10px rgba(0,0,0,0.4);
+    }
+
+    footer p {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 0.9em;
+    }
+
+    /* ========== SOCIAL ICONS ========== */
+    .socials img {
+      margin: 10px;
+      width: 45px;
+      height: 45px;
+      transition: transform 0.3s;
+    }
+
+    .socials img:hover {
+      transform: scale(1.2);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .menu {flex-direction: column; display: none; background: #111; padding: 10px;}
+      .menu.active {display: flex;}
+      .toggle-btn {
+        display: block;
+        cursor: pointer;
+        font-size: 1.5em;
+        color: #fff;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .toggle-btn {display: none;}
+    }
   </style>
 </head>
 <body>
 
-  <canvas id="matrix"></canvas>
-
+  <!-- NAVBAR -->
   <nav>
-    <img src="https://raw.githubusercontent.com/Darklight000999/darklighth00999wepsait.org/main/20250505_052934.png" alt="darklight Logo" />
-    <span>darklight000999</span>
+    <div style="display:flex; align-items:center;">
+      <img src="https://raw.githubusercontent.com/Darklight000999/darklighth00999wepsait.org/main/20250505_052934.png" alt="Darklight Logo">
+      <span>Darklight000999</span>
+    </div>
+    <div class="toggle-btn" onclick="toggleMenu()">☰</div>
+    <div class="menu" id="menu">
+      <a href="#about">About</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#notes">Notes</a>
+      <a href="#ehacking">Ehacking</a>
+    </div>
   </nav>
-  <button class="openbtn" onclick="openNav()">☰ Menu</button>
 
-  <div id="mySidebar" class="sidebar">
-    <a href="javascript:void(0)" onclick="closeNav()">❌ Close</a>
-    <a href="#about">About</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#notes">Notes</a>
-    <a href="#ehacking">Ehacking</a>
-    <a href="#social">Social</a>
-  </div>
+  <!-- ABOUT -->
+  <section id="about">
+    <h2>About Me</h2>
+    <p>Welcome to Darklight000999’s official website. Here you will find projects, hacking resources, tutorials, and notes. Explore the sections below to know more.</p>
+  </section>
 
-  <div id="main" class="content">
-    <section id="about" class="section"><h2>About</h2>
-      <p>यह वेबसाइट हैकिंग, साइबर सिक्योरिटी और लर्निंग resources को Modern और Professional थीम के साथ दिखाती है।</p>
-    </section>
-    <section id="gallery" class="section gallery"><h2>Gallery</h2>
-      <img src="images/hacker1.jpg" alt="Hacker Image 1" />
-      <img src="images/hacker2.jpg" alt="Hacker Image 2" />
-    </section>
-    <section id="notes" class="section"><h2>Notes</h2>
-      <p>यहाँ आप अपने hacking notes और learning materials जोड़ सकते हैं।</p>
-    </section>
-    <section id="ehacking" class="section"><h2>Ehacking</h2>
-      <p>Ehacking tutorials, tools और resources यहाँ available होंगे।</p>
-    </section>
-    <section id="social" class="section"><h2>Social</h2>
-      <p>हमसे जुड़ें: <!-- 🌟 Optional Banner - यहां अपना बैनर लिंक लगाएं -->
-<!-- <img src="https://your-banner-image-link.com/banner.jpg" alt="Banner" style="width:100%; border-radius:15px;"/> -->
+  <!-- GALLERY -->
+  <section id="gallery">
+    <h2>Gallery</h2>
+    <div class="gallery">
+      <img src="https://picsum.photos/400/250?random=1" alt="Gallery 1">
+      <img src="https://picsum.photos/400/250?random=2" alt="Gallery 2">
+      <img src="https://picsum.photos/400/250?random=3" alt="Gallery 3">
+      <img src="https://picsum.photos/400/250?random=4" alt="Gallery 4">
+    </div>
+  </section>
 
-<p align="center" style="margin: 20px 0;">
-  <a href="https://www.instagram.com/darklight000999_?igsh=cmEwN3htaTRodzl3" target="_blank">
-    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" width="45" height="45" style="margin:10px;"/>
-  </a>
-  
-  <a href="https://t.me/darklight000999" target="_blank">
-    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg" alt="Telegram" width="45" height="45" style="margin:10px;"/>
-  </a>
-  
-  <a href="https://chat.whatsapp.com/KALyrkZm2ru2xiTY9u0Tc0?mode=ac_t" target="_blank">
-    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp" width="45" height="45" style="margin:10px;"/>
-  </a>
-  
-  <a href="https://www.facebook.com/darklight000999" target="_blank">
-    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook" width="45" height="45" style="margin:10px;"/>
-  </a>
-  
-  <a href="https://youtube.com/@mr_br_hacker_33?si=IBcIbcrVE1Xur_vL" target="_blank">
-    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" alt="YouTube" width="45" height="45" style="margin:10px;"/>
-  </a>
-  
-  <a href="https://github.com/Darklight000999" target="_blank">
-    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" alt="GitHub" width="45" height="45" style="margin:10px;"/>
-  </a>
-  
-  <a href="https://share.google/BIo6sUsdFCFMMkc0z" target="_blank">
-    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/google.svg" alt="Google Business" width="45" height="45" style="margin:10px;"/>
-  </a>
-</p>
-    </section>
-  </div>
+  <!-- NOTES -->
+  <section id="notes">
+    <h2>Notes</h2>
+    <p>Here you can upload or link your personal notes, hacking tutorials, and references.</p>
+  </section>
+
+  <!-- EHACKING -->
+  <section id="ehacking">
+    <h2>Ehacking</h2>
+    <p>Learn ethical hacking, tools, and security knowledge with Darklight000999.</p>
+  </section>
+
+  <!-- FOOTER WITH SOCIAL ICONS -->
+  <footer>
+    <div class="socials">
+      <a href="https://www.instagram.com/darklight000999_?igsh=cmEwN3htaTRodzl3" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"/>
+      </a>
+      <a href="https://t.me/darklight000999" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram"/>
+      </a>
+      <a href="https://chat.whatsapp.com/KALyrkZm2ru2xiTY9u0Tc0?mode=ac_t" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp"/>
+      </a>
+      <a href="https://www.facebook.com/darklight000999" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"/>
+      </a>
+      <a href="https://youtube.com/@mr_br_hacker_33?si=IBcIbcrVE1Xur_vL" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube"/>
+      </a>
+      <a href="https://github.com/Darklight000999" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub"/>
+      </a>
+      <a href="https://share.google/BIo6sUsdFCFMMkc0z" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="Google Business"/>
+      </a>
+    </div>
+    <p>© 2025 Darklight000999 | All Rights Reserved</p>
+  </footer>
 
   <script>
-    function openNav() {
-      document.getElementById("mySidebar").style.width = "260px";
-      document.getElementById("main").style.marginLeft = "260px";
+    function toggleMenu() {
+      document.getElementById("menu").classList.toggle("active");
     }
-    function closeNav() {
-      document.getElementById("mySidebar").style.width = "0";
-      document.getElementById("main").style.marginLeft = "0";
-    }
-  </script>
-
-  <script>
-    const canvas = document.getElementById("matrix");
-    const ctx = canvas.getContext("2d");
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    window.addEventListener("resize", resizeCanvas);
-    resizeCanvas();
-    const chars = "01@#$%&*+=<>?/\\|{}[]";
-    const fontSize = 18;
-    const columns = Math.floor(canvas.width / fontSize);
-    const drops = Array(columns).fill(1);
-    function draw() {
-      ctx.fillStyle = "rgba(0,0,0,0.25)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.font = fontSize + "px monospace";
-      for (let i = 0; i < drops.length; i++) {
-        const text = chars[Math.floor(Math.random() * chars.length)];
-        const colors = ["#00ff00", "#00ffff", "#ff0033", "#39ff14", "#ffcc00"];
-        ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-        drops[i]++;
-      }
-    }
-    setInterval(draw, 40);
   </script>
 </body>
 </html>
