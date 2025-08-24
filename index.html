@@ -4,249 +4,296 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Darklight Cyber Security</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    * {margin:0; padding:0; box-sizing:border-box;}
+    /* Reset */
+    * {margin:0;padding:0;box-sizing:border-box;font-family: 'Segoe UI',sans-serif;}
 
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #0d0d0d;
-      color: #f0f0f0;
-      line-height: 1.6;
+      background: #0a0a0a;
+      color: #fff;
     }
 
     /* Navbar */
-    .navbar {
-      width: 100%;
+    header {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 15px 40px;
+      justify-content: space-between;
       background: #111;
+      padding: 12px 20px;
       position: fixed;
       top: 0;
+      left: 0;
+      width: 100%;
       z-index: 1000;
-      border-bottom: 1px solid #222;
     }
-
-    .navbar .logo {
+    header .logo {
       display: flex;
       align-items: center;
+      gap: 10px;
     }
-
-    .navbar .logo img {
+    header .logo img {
       height: 40px;
-      margin-right: 10px;
     }
-
-    .navbar .logo span {
+    header .logo span {
       font-size: 20px;
       font-weight: bold;
-      color: #00ffe0;
+      color: #fff;
     }
 
-    .navbar ul {
-      list-style: none;
-      display: flex;
-      gap: 25px;
+    /* Menu Button */
+    .menu-btn {
+      font-size: 26px;
+      cursor: pointer;
+      color: #00ff99;
+      margin-right: auto;
+      margin-left: 15px;
     }
 
-    .navbar ul li a {
-      text-decoration: none;
-      color: #f0f0f0;
-      font-weight: 500;
-      transition: 0.3s;
-    }
-
-    .navbar ul li a:hover {
-      color: #00ffe0;
-    }
-
-    /* Hamburger */
-    .menu-toggle {
-      display: none;
-      font-size: 28px;
-      color: #00ffe0;
+    /* Profile */
+    .profile {
+      font-size: 26px;
+      color: #ffde59;
       cursor: pointer;
     }
 
     /* Side Menu */
     .side-menu {
-      height: 100%;
-      width: 0;
       position: fixed;
       top: 0;
-      right: 0;
-      background-color: #111;
-      overflow-x: hidden;
+      right: -260px;
+      width: 260px;
+      height: 100%;
+      background: #111;
+      box-shadow: -2px 0 8px rgba(0,0,0,0.7);
       transition: 0.4s;
-      padding-top: 60px;
+      padding: 60px 20px;
       z-index: 2000;
     }
-
+    .side-menu.active {
+      right: 0;
+    }
     .side-menu a {
-      padding: 12px 25px;
-      text-decoration: none;
-      font-size: 20px;
-      color: #f0f0f0;
       display: block;
+      color: #fff;
+      text-decoration: none;
+      margin: 18px 0;
+      font-size: 18px;
       transition: 0.3s;
     }
-
     .side-menu a:hover {
-      color: #00ffe0;
+      color: #00ff99;
     }
-
-    .side-menu .close-btn {
+    .side-menu .close {
       position: absolute;
-      top: 20px;
-      right: 25px;
-      font-size: 36px;
-      color: #f0f0f0;
+      top: 15px;
+      right: 20px;
+      font-size: 28px;
       cursor: pointer;
+      color: #fff;
     }
 
-    @media (max-width: 768px) {
-      .navbar ul {
-        display: none;
-      }
-      .menu-toggle {
-        display: block;
-      }
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      background: url('https://img.freepik.com/free-photo/futuristic-hacker-background-with-binary-code_23-2148503783.jpg') no-repeat center/cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+    .hero h1 {
+      font-size: 40px;
+      color: #00ff99;
+      text-shadow: 0 0 10px #00ff99;
+    }
+    .hero p {
+      margin-top: 15px;
+      font-size: 18px;
+      color: #ddd;
     }
 
-    /* Sections */
-    section {
-      padding: 100px 40px;
-      min-height: 100vh;
+    /* Gallery */
+    .gallery {
+      padding: 60px 20px;
+      text-align: center;
     }
-
-    #about h2, #gallery h2, #notes h2, #contact h2 {
-      color: #00ffe0;
+    .gallery h2 {
+      font-size: 28px;
+      color: #00ff99;
       margin-bottom: 20px;
     }
-
-    #gallery img {
-      width: 300px;
-      margin: 10px;
-      border-radius: 10px;
-      border: 2px solid #00ffe0;
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+      gap: 20px;
     }
-
-    footer {
-      background: #111;
-      padding: 20px;
-      text-align: center;
-      border-top: 1px solid #222;
-      color: #888;
-    }
-
-    /* Social Icons */
-    .social-links {
-      margin-top: 20px;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-    .social-links a img {
-      height: 40px;
-      width: 40px;
-      border-radius: 50%;
+    .gallery-grid img {
+      width: 100%;
+      border-radius: 8px;
       transition: 0.3s;
     }
-    .social-links a img:hover {
-      transform: scale(1.1);
+    .gallery-grid img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Notes & Hacking Section */
+    .notes {
+      padding: 60px 20px;
+      background: #111;
+    }
+    .notes h2 {
+      font-size: 28px;
+      color: #00ff99;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+      gap: 20px;
+    }
+    .card {
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 15px #00ff99;
+    }
+    .card h3 {
+      margin-bottom: 10px;
+      color: #00ff99;
+    }
+    .card p {
+      color: #ccc;
+      font-size: 14px;
+    }
+
+    /* Social Media */
+    .social {
+      text-align: center;
+      padding: 50px 20px;
+    }
+    .social h2 {
+      color: #00ff99;
+      margin-bottom: 20px;
+    }
+    .social-links a {
+      margin: 10px;
+      display: inline-block;
+      font-size: 26px;
+      color: #fff;
+      transition: 0.3s;
+    }
+    .social-links a:hover {
+      color: #00ff99;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #0a0a0a;
+      color: #666;
+      font-size: 14px;
+    }
+
+    /* Responsive */
+    @media(max-width:600px){
+      .hero h1 {font-size: 28px;}
     }
   </style>
 </head>
 <body>
+
   <!-- Navbar -->
-  <nav class="navbar">
+  <header>
     <div class="logo">
-      <img src="https://github.com/Darklight000999/darklighth00999wepsait.org/raw/main/20250505_052934.png" alt="Darklight Logo">
-      <span>Darklight Security</span>
+      <img src="https://raw.githubusercontent.com/Darklight000999/darklighth00999wepsait.org/main/20250505_052934.png" alt="Logo">
+      <span>darklight000999</span>
     </div>
-
-    <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#gallery">Gallery</a></li>
-      <li><a href="#notes">Notes</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-
-    <span class="menu-toggle" onclick="openMenu()">☰</span>
-  </nav>
+    <div class="menu-btn"><i class="fas fa-bars"></i></div>
+    <div class="profile"><i class="fas fa-user-circle"></i></div>
+  </header>
 
   <!-- Side Menu -->
-  <div id="sideMenu" class="side-menu">
-    <span class="close-btn" onclick="closeMenu()">&times;</span>
-    <a href="#about" onclick="closeMenu()">About</a>
-    <a href="#gallery" onclick="closeMenu()">Gallery</a>
-    <a href="#notes" onclick="closeMenu()">Notes</a>
-    <a href="#contact" onclick="closeMenu()">Contact</a>
+  <div class="side-menu" id="sideMenu">
+    <span class="close" onclick="toggleMenu()">&times;</span>
+    <a href="#">Home</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#notes">Notes</a>
+    <a href="#social">Social Media</a>
+    <a href="#contact">Contact</a>
   </div>
 
-  <!-- About -->
-  <section id="about">
-    <h2>About Us</h2>
-    <p>Darklight Cyber Security एक Professional Agency है जो Ethical Hacking, Penetration Testing, और Cyber Security Solutions में काम करती है।</p>
+  <!-- Hero -->
+  <section class="hero">
+    <div>
+      <h1>Cyber Security & Ethical Hacking Agency</h1>
+      <p>Protecting the digital world with next-gen solutions</p>
+    </div>
   </section>
 
   <!-- Gallery -->
-  <section id="gallery">
-    <h2>Gallery</h2>
-    <img src="https://img.freepik.com/free-vector/cyber-security-concept_53876-93805.jpg">
-    <img src="https://img.freepik.com/free-vector/ethical-hacking-concept_23-2148532255.jpg">
-    <img src="https://img.freepik.com/free-vector/data-protection-cyber-security-banner_1017-33402.jpg">
-  </section>
-
-  <!-- Notes -->
-  <section id="notes">
-    <h2>Hacking Notes</h2>
-    <p>यहाँ पर आप Cyber Security और Hacking से जुड़े Notes, Research Papers, और Latest Updates पा सकते हैं।</p>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact">
-    <h2>Contact Us</h2>
-    <p>📧 darklight@example.com</p>
-    <p>🔗 Telegram: @darklight000999</p>
-
-    <div class="social-links">
-      <a href="https://www.instagram.com/darklight000999_?igsh=cmEwN3htaTRodzl3">
-        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
-      </a>
-      <a href="https://t.me/darklight000999">
-        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram">
-      </a>
-      <a href="https://chat.whatsapp.com/KALyrkZm2ru2xiTY9u0Tc0?mode=ac_t">
-        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
-      </a>
-      <a href="https://www.facebook.com/darklight000999">
-        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
-      </a>
-      <a href="https://youtube.com/@mr_br_hacker_33?si=IBcIbcrVE1Xur_vL">
-        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
-      </a>
-      <a href="https://github.com/Darklight000999">
-        <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub">
-      </a>
-      <a href="https://share.google/BIo6sUsdFCFMMkc0z">
-        <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="Google Business">
-      </a>
+  <section class="gallery" id="gallery">
+    <h2>Our Work</h2>
+    <div class="gallery-grid">
+      <img src="https://img.freepik.com/free-photo/hacker-using-computer-security-breach_53876-103595.jpg" alt="Cyber Security">
+      <img src="https://img.freepik.com/free-photo/digital-lock-digital-cyber-space_53876-111504.jpg" alt="Security">
+      <img src="https://img.freepik.com/free-photo/futuristic-hud-interface_53876-104621.jpg" alt="Hacking">
+      <img src="https://img.freepik.com/free-photo/programming-background-with-person-working-html_23-2150038842.jpg" alt="Ethical Hacking">
     </div>
   </section>
 
+  <!-- Notes -->
+  <section class="notes" id="notes">
+    <h2>Notes & Research</h2>
+    <div class="card-container">
+      <div class="card">
+        <h3>Penetration Testing</h3>
+        <p>We provide advanced penetration testing to secure your applications and networks.</p>
+      </div>
+      <div class="card">
+        <h3>Cyber Threat Analysis</h3>
+        <p>Our experts monitor global threats and give real-time solutions.</p>
+      </div>
+      <div class="card">
+        <h3>Ethical Hacking Training</h3>
+        <p>We train individuals and organizations to protect themselves from hackers.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Media -->
+  <section class="social" id="social">
+    <h2>Connect With Us</h2>
+    <div class="social-links">
+      <a href="https://www.instagram.com/darklight000999_" target="_blank"><i class="fab fa-instagram" style="color:#E4405F;"></i></a>
+      <a href="https://t.me/darklight000999" target="_blank"><i class="fab fa-telegram" style="color:#2CA5E0;"></i></a>
+      <a href="https://chat.whatsapp.com/KALyrkZm2ru2xiTY9u0Tc0" target="_blank"><i class="fab fa-whatsapp" style="color:#25D366;"></i></a>
+      <a href="https://www.facebook.com/darklight000999" target="_blank"><i class="fab fa-facebook" style="color:#1877F2;"></i></a>
+      <a href="https://youtube.com/@mr_br_hacker_33" target="_blank"><i class="fab fa-youtube" style="color:#FF0000;"></i></a>
+      <a href="https://github.com/Darklight000999" target="_blank"><i class="fab fa-github" style="color:#fff;"></i></a>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer>
-    © 2025 Darklight Cyber Security | All Rights Reserved
+    <p>© 2025 Darklight Cyber Security Agency | All Rights Reserved</p>
   </footer>
 
+  <!-- Script -->
   <script>
-    function openMenu() {
-      document.getElementById("sideMenu").style.width = "250px";
-    }
-    function closeMenu() {
-      document.getElementById("sideMenu").style.width = "0";
+    const menuBtn = document.querySelector('.menu-btn');
+    const sideMenu = document.getElementById('sideMenu');
+    menuBtn.addEventListener('click', toggleMenu);
+
+    function toggleMenu() {
+      sideMenu.classList.toggle('active');
     }
   </script>
 </body>
