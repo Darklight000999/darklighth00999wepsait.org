@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>darklight000999</title>
+  <title>Darklight Cyber Security</title>
   <style>
     /* Reset */
     * {
@@ -25,15 +25,9 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes slideInRight {
-      from { right: -250px; }
-      to { right: 0; }
-    }
-
-    @keyframes glowPulse {
-      0% { box-shadow: 0 0 8px cyan; }
-      50% { box-shadow: 0 0 20px cyan; }
-      100% { box-shadow: 0 0 8px cyan; }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* Header */
@@ -52,14 +46,16 @@
       animation: fadeIn 1s ease-in-out;
     }
 
-    /* Left Menu Icon */
-    .menu-toggle {
-      font-size: 30px;
-      color: cyan;
+    /* Menu Button */
+    .openbtn {
+      font-size: 26px;
       cursor: pointer;
+      background: none;
+      border: none;
+      color: cyan;
       transition: transform 0.3s ease;
     }
-    .menu-toggle:hover {
+    .openbtn:hover {
       transform: rotate(90deg);
       color: yellow;
     }
@@ -73,12 +69,11 @@
     }
 
     .logo-section img {
-      width: 60px;
-      height: 60px;
+      width: 70px;
+      height: 70px;
       border-radius: 50%;
       border: 2px solid cyan;
-      box-shadow: 0 0 10px cyan;
-      animation: glowPulse 2s infinite;
+      box-shadow: 0 0 12px cyan;
     }
 
     .logo-section span {
@@ -86,10 +81,6 @@
       font-weight: bold;
       color: #fff;
       text-shadow: 0 0 8px #00ffe7;
-      transition: color 0.3s ease;
-    }
-    .logo-section span:hover {
-      color: yellow;
     }
 
     /* Profile */
@@ -105,69 +96,62 @@
       border-radius: 50%;
       cursor: pointer;
       box-shadow: 0 0 8px yellow;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .profile-icon:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 16px orange;
     }
 
-    /* Side Navigation */
-    .side-menu {
+    /* Sidebar */
+    .sidebar {
+      height: 100%;
+      width: 0;
       position: fixed;
       top: 0;
-      right: -250px;
-      width: 250px;
-      height: 100%;
-      background: #111;
-      transition: 0.3s ease;
+      left: 0;
+      background-color: #111;
+      overflow-x: hidden;
+      transition: 0.5s;
       padding-top: 60px;
       z-index: 2000;
+      box-shadow: 3px 0 15px rgba(0,255,255,0.2);
     }
 
-    .side-menu.active {
-      right: 0;
-      animation: slideInRight 0.5s ease;
-    }
-
-    .side-menu a {
-      display: block;
-      color: #fff;
-      padding: 15px 20px;
+    .sidebar a {
+      padding: 12px 25px;
       text-decoration: none;
-      font-size: 18px;
+      font-size: 20px;
+      color: #ddd;
+      display: block;
       transition: 0.3s;
-      animation: fadeIn 1s ease forwards;
       opacity: 0;
-    }
-    .side-menu.active a {
-      opacity: 1;
+      transform: translateX(-20px);
     }
 
-    .side-menu a:hover {
-      background: #0f0f0f;
+    .sidebar.open a {
+      opacity: 1;
+      transform: translateX(0);
+      transition: all 0.4s ease;
+    }
+
+    .sidebar a:hover {
       color: cyan;
-      text-shadow: 0 0 6px cyan;
+      text-shadow: 0 0 10px cyan;
       transform: translateX(5px);
     }
 
-    .close-btn {
+    /* Close button */
+    .sidebar .closebtn {
       position: absolute;
       top: 15px;
       right: 20px;
       font-size: 30px;
       color: #fff;
       cursor: pointer;
-      transition: transform 0.3s ease;
     }
-    .close-btn:hover {
-      transform: rotate(90deg);
+    .sidebar .closebtn:hover {
       color: red;
     }
 
-    /* Content placeholder */
+    /* Hero Section */
     .hero {
-      margin-top: 100px;
+      margin-top: 120px;
       text-align: center;
       padding: 60px 20px;
       animation: fadeIn 2s ease;
@@ -177,21 +161,68 @@
       font-size: 42px;
       color: cyan;
       text-shadow: 0 0 12px cyan;
-      animation: fadeIn 2s ease-in-out;
     }
 
     .hero p {
       margin-top: 15px;
       color: #aaa;
       font-size: 18px;
-      animation: fadeIn 2.5s ease-in-out;
+    }
+
+    /* Services Section */
+    .services {
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .services h2 {
+      font-size: 32px;
+      margin-bottom: 40px;
+      color: cyan;
+      text-shadow: 0 0 12px cyan;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+    }
+
+    .card {
+      background: #1a1a1a;
+      padding: 25px;
+      border-radius: 12px;
+      width: 220px;
+      text-align: center;
+      box-shadow: 0 0 12px rgba(0,255,255,0.2);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      animation: fadeInUp 1.5s ease forwards;
+      opacity: 0;
+    }
+
+    .card img {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      color: #fff;
+      font-size: 18px;
+    }
+
+    .card:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 0 25px cyan, 0 0 35px purple;
     }
   </style>
 </head>
 <body>
   <!-- Header -->
   <header>
-    <div class="menu-toggle" onclick="openMenu()">☰</div>
+    <button class="openbtn" onclick="openNav()">☰ Menu</button>
 
     <div class="logo-section">
       <img src="20250505_052934.png" alt="Logo">
@@ -201,9 +232,9 @@
     <div class="profile-icon">👤</div>
   </header>
 
-  <!-- Side Menu -->
-  <div class="side-menu" id="sideMenu">
-    <span class="close-btn" onclick="closeMenu()">×</span>
+  <!-- Sidebar -->
+  <div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">❌ Close</a>
     <a href="#">Home</a>
     <a href="#">About</a>
     <a href="#">Cyber Security</a>
@@ -219,16 +250,7 @@
     <p>Professional Cyber Security & Ethical Hacking Services</p>
   </section>
 
-  <script>
-    function openMenu() {
-      document.getElementById("sideMenu").classList.add("active");
-    }
-    function closeMenu() {
-      document.getElementById("sideMenu").classList.remove("active");
-    }
-  </script>
-  
-</body><!-- Services Section -->
+  <!-- Services Section -->
   <section class="services">
     <h2>Our Services</h2>
     <div class="card-container">
@@ -250,4 +272,17 @@
       </div>
     </div>
   </section>
+
+  <script>
+    function openNav() {
+      document.getElementById("mySidebar").style.width = "250px";
+      document.getElementById("mySidebar").classList.add("open");
+    }
+
+    function closeNav() {
+      document.getElementById("mySidebar").style.width = "0";
+      document.getElementById("mySidebar").classList.remove("open");
+    }
+  </script>
+</body>
 </html>
