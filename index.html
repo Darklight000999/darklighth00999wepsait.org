@@ -2,209 +2,141 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Darklight Cyber Security</title>
   <style>
-    * {margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', Tahoma, sans-serif;}
+    /* Reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      background:#0a0f1c;
-      color:#fff;
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-      overflow-x:hidden;
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      color: #222;
     }
 
-    /* ===== NAVBAR ===== */
-    nav {
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      background:#111827;
-      padding:10px 25px;
-      box-shadow:0 4px 10px rgba(0,0,0,0.5);
-      position:sticky;
-      top:0;
-      z-index:1000;
+    /* Navbar */
+    .navbar {
+      width: 100%;
+      background: linear-gradient(90deg, #0061ff, #60efff);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
 
-    nav img {
-      height:45px;
-      margin-right:10px;
+    .navbar .logo {
+      display: flex;
+      align-items: center;
     }
 
-    nav span {
-      font-size:1.3em;
-      font-weight:bold;
-      color:#00f7ff;
+    .navbar .logo img {
+      height: 40px;
+      margin-right: 10px;
     }
 
-    /* Menu Button */
-    .menu-btn {
-      display:flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 14px;
-      background:linear-gradient(135deg,#00ff99,#007bff);
-      border-radius:8px;
-      font-size:1em;
-      font-weight:bold;
-      color:#fff;
-      cursor:pointer;
-      box-shadow:0 3px 10px rgba(0,0,0,0.4);
-      transition:transform 0.2s;
+    .navbar .logo span {
+      font-size: 20px;
+      font-weight: bold;
+      color: white;
     }
 
-    .menu-btn:hover { transform:scale(1.05); }
-
-    .menu-btn span {
-      font-size:1.3em;
-      line-height:1;
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
     }
 
-    /* Hidden menu links */
-    .menu-links {
-      display:none;
-      position:absolute;
-      top:60px;
-      right:25px;
-      background:#1e293b;
-      border-radius:8px;
-      box-shadow:0 4px 12px rgba(0,0,0,0.6);
-      flex-direction:column;
-      min-width:150px;
+    .navbar ul li a {
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: 0.3s;
     }
 
-    .menu-links a {
-      padding:12px;
-      text-decoration:none;
-      color:#fff;
-      font-weight:bold;
-      transition:background 0.3s;
-      text-align:left;
+    .navbar ul li a:hover {
+      color: yellow;
     }
 
-    .menu-links a:hover { background:#00f7ff; color:#000; }
-
-    /* ===== SECTIONS ===== */
-    section {
-      padding:70px 20px;
-      text-align:center;
+    /* Mobile Menu */
+    .menu-toggle {
+      display: none;
+      font-size: 26px;
+      color: white;
+      cursor: pointer;
     }
 
-    section h2 {
-      font-size:2em;
-      margin-bottom:20px;
-      color:#00f7ff;
-      text-transform:uppercase;
-    }
+    @media (max-width: 768px) {
+      .navbar {
+        flex-wrap: wrap;
+      }
 
-    section p {
-      max-width:850px;
-      margin:auto;
-      line-height:1.6;
-      font-size:1.05em;
-    }
+      .navbar ul {
+        display: none;
+        flex-direction: column;
+        background: #0061ff;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        width: 200px;
+        padding: 15px;
+        border-radius: 8px;
+      }
 
-    /* ===== GALLERY ===== */
-    .gallery {
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-      gap:20px;
-      margin-top:30px;
-    }
+      .navbar ul.active {
+        display: flex;
+      }
 
-    .gallery img {
-      width:100%;
-      border-radius:12px;
-      box-shadow:0 4px 15px rgba(0,255,200,0.4);
-      transition:transform 0.3s, box-shadow 0.3s;
-    }
-
-    .gallery img:hover {
-      transform:scale(1.05);
-      box-shadow:0 6px 25px rgba(0,255,200,0.7);
-    }
-
-    /* ===== FOOTER ===== */
-    footer {
-      margin-top:auto;
-      background:#111827;
-      padding:20px;
-      text-align:center;
-      box-shadow:0 -4px 12px rgba(0,0,0,0.4);
-    }
-
-    footer p {
-      margin-top:10px;
-      color:#aaa;
-      font-size:0.9em;
+      .menu-toggle {
+        display: block;
+      }
     }
   </style>
 </head>
 <body>
-
-  <!-- NAVBAR -->
-  <nav>
-    <div style="display:flex; align-items:center;">
-      <img src="https://raw.githubusercontent.com/Darklight000999/darklighth00999wepsait.org/main/20250505_052934.png" alt="Darklight Logo">
-      <span>Darklight Security</span>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="https://github.com/Darklight000999/darklighth00999wepsait.org/raw/main/20250505_052934.png" alt="Darklight Logo">
+      <span>Darklight Cyber Security</span>
     </div>
 
-    <div class="menu">
-      <div class="menu-btn" onclick="toggleMenu()">
-        <span>☰</span> Menu
-      </div>
-      <div class="menu-links" id="menuLinks">
-        <a href="#about">About</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#notes">Notes</a>
-        <a href="#hacking">Hacking</a>
-      </div>
-    </div>
+    <span class="menu-toggle" onclick="toggleMenu()">☰</span>
+    <ul id="menu">
+      <li><a href="#about">About</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#notes">Notes</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
   </nav>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <h2>About Us</h2>
-    <p>Darklight Cyber Security is dedicated to protecting the digital world. We provide ethical hacking, cyber defense solutions, training, and consultancy to ensure a safer cyberspace.</p>
-  </section>
-
-  <!-- GALLERY -->
-  <section id="gallery">
-    <h2>Cyber Gallery</h2>
-    <div class="gallery">
-      <img src="https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=900&q=80" alt="Cyber Security Code">
-      <img src="https://images.unsplash.com/photo-1581092795360-8b6f8f9fdfb5?auto=format&fit=crop&w=900&q=80" alt="Hacker Laptop">
-      <img src="https://images.unsplash.com/photo-1605902711622-cfb43c4437d9?auto=format&fit=crop&w=900&q=80" alt="Cyber Lock">
-      <img src="https://images.pexels.com/photos/5380642/pexels-photo-5380642.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Matrix Code">
-    </div>
-  </section>
-
-  <!-- NOTES -->
-  <section id="notes">
-    <h2>Notes</h2>
-    <p>[ PDF, Docs, Study Material links... ]</p>
-  </section>
-
-  <!-- HACKING -->
-  <section id="hacking">
-    <h2>Hacking</h2>
-    <p>[ Ethical hacking tools, services, resources... ]</p>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <p>© 2025 Darklight Cyber Security | All Rights Reserved</p>
-  </footer>
-
   <script>
-    function toggleMenu(){
-      const menu = document.getElementById("menuLinks");
-      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+    function toggleMenu() {
+      document.getElementById("menu").classList.toggle("active");
     }
   </script>
 
+  <section id="about" style="padding:40px;">
+    <h2>About</h2>
+    <p>यह वेबसाइट Ethical Hacking और Cyber Security Resources को Modern और Professional theme के साथ दिखाती है।</p>
+  </section>
+
+  <section id="gallery" style="padding:40px;">
+    <h2>Gallery</h2>
+    <img src="https://img.freepik.com/free-vector/cyber-security-concept_53876-93805.jpg" width="300">
+    <img src="https://img.freepik.com/free-vector/ethical-hacking-concept_23-2148532255.jpg" width="300">
+  </section>
+
+  <section id="notes" style="padding:40px;">
+    <h2>Notes</h2>
+    <p>यहाँ आप अपने hacking notes और learning materials जोड़ सकते हैं।</p>
+  </section>
+
+  <section id="contact" style="padding:40px;">
+    <h2>Contact</h2>
+    <p>📧 darklight@example.com</p>
+  </section>
 </body>
 </html>
