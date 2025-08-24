@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modern Hacker Portal</title>
+  <title>Darklight00999 - Modern Hacker Portal</title>
   <style>
-    /* Reset */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Segoe UI', Tahoma, sans-serif;
@@ -25,10 +24,13 @@
 
     /* Navbar */
     nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
       background: linear-gradient(90deg, #00c6ff, #0072ff, #00ff87);
       padding: 15px;
-      text-align: center;
-      font-size: 24px;
+      font-size: 22px;
       font-weight: bold;
       color: white;
       letter-spacing: 2px;
@@ -37,6 +39,11 @@
       top: 0;
       z-index: 10;
       text-shadow: 0 0 8px rgba(255,255,255,0.6);
+    }
+    nav img {
+      height: 32px;
+      width: 32px;
+      border-radius: 50%;
     }
 
     /* Sidebar */
@@ -52,7 +59,6 @@
       z-index: 2;
       box-shadow: 5px 0 20px rgba(0,0,0,0.7);
     }
-
     .sidebar a {
       padding: 14px 25px;
       text-decoration: none;
@@ -89,15 +95,15 @@
       margin: 30px 0;
       padding: 25px;
       border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      backdrop-filter: blur(4px);
     }
 
-    #about { background: linear-gradient(135deg, rgba(0,255,255,0.15), rgba(0,128,255,0.15)); }
-    #gallery { background: linear-gradient(135deg, rgba(0,255,127,0.15), rgba(0,255,0,0.15)); }
-    #notes { background: linear-gradient(135deg, rgba(255,255,0,0.15), rgba(255,165,0,0.15)); }
-    #ehacking { background: linear-gradient(135deg, rgba(255,0,127,0.15), rgba(255,0,0,0.15)); }
-    #social { background: linear-gradient(135deg, rgba(0,127,255,0.15), rgba(127,0,255,0.15)); }
+    #about { background: linear-gradient(135deg, rgba(0,255,255,0.2), rgba(0,128,255,0.2)); }
+    #gallery { background: linear-gradient(135deg, rgba(0,255,127,0.2), rgba(0,255,0,0.2)); }
+    #notes { background: linear-gradient(135deg, rgba(255,255,0,0.2), rgba(255,165,0,0.2)); }
+    #ehacking { background: linear-gradient(135deg, rgba(255,0,127,0.2), rgba(255,0,0,0.2)); }
+    #social { background: linear-gradient(135deg, rgba(0,127,255,0.2), rgba(127,0,255,0.2)); }
 
     h2 {
       margin-bottom: 15px;
@@ -106,7 +112,6 @@
       text-shadow: 0 0 10px rgba(255,255,255,0.6);
     }
 
-    /* Gallery */
     .gallery img {
       width: 260px;
       height: 160px;
@@ -120,7 +125,6 @@
       box-shadow: 0 5px 20px rgba(0,255,200,0.7);
     }
 
-    /* Links */
     a { color: #00ffe0; text-decoration: none; }
     a:hover { text-decoration: underline; }
   </style>
@@ -130,8 +134,11 @@
   <!-- Matrix Background -->
   <canvas id="matrix"></canvas>
 
-  <!-- Navbar -->
-  <nav>⚡ Modern Hacker Portal</nav>
+  <!-- Navbar with logo -->
+  <nav>
+    <img src="https://i.ibb.co/8jV2rCq/logo.png" alt="Logo">
+    <span>darklight00999</span>
+  </nav>
   <button class="openbtn" onclick="openNav()">☰ Menu</button>
 
   <!-- Sidebar -->
@@ -189,7 +196,7 @@
     }
   </script>
 
-  <!-- Matrix Effect -->
+  <!-- Matrix Effect (No Glitch) -->
   <script>
     const canvas = document.getElementById("matrix");
     const ctx = canvas.getContext("2d");
@@ -207,7 +214,7 @@
     const drops = Array(columns).fill(1);
 
     function draw() {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.08)";
+      ctx.fillStyle = "rgba(0, 0, 0, 0.15)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       ctx.font = fontSize + "px monospace";
@@ -215,10 +222,9 @@
       for (let i = 0; i < drops.length; i++) {
         const text = letters[Math.floor(Math.random() * letters.length)];
 
-        // Multicolor glowing
         const colors = ["#00ff00", "#ffffff", "#00aaff", "#ff0033", "#39ff14", "#ffcc00"];
         ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
-        ctx.shadowBlur = 20;
+        ctx.shadowBlur = 15;
         ctx.shadowColor = ctx.fillStyle;
 
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
@@ -227,12 +233,6 @@
           drops[i] = 0;
         }
         drops[i]++;
-      }
-
-      // Subtle glitch
-      if (Math.random() > 0.985) {
-        ctx.fillStyle = "rgba(255, 255, 255, 0.1)";
-        ctx.fillRect(0, Math.random() * canvas.height, canvas.width, 2);
       }
     }
 
