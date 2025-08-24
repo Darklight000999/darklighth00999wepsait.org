@@ -30,6 +30,11 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
     /* Header */
     header {
       width: 100%;
@@ -169,6 +174,59 @@
       font-size: 18px;
     }
 
+    /* 🔥 New Info Section */
+    .info-section {
+      padding: 60px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      animation: fadeInUp 2s ease;
+    }
+
+    .info-image img {
+      max-width: 350px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,255,255,0.3);
+      animation: slideIn 1.5s ease;
+    }
+
+    .info-content {
+      max-width: 500px;
+      animation: fadeInUp 2s ease;
+    }
+
+    .info-content h3 {
+      font-size: 26px;
+      margin-bottom: 15px;
+      color: cyan;
+      text-shadow: 0 0 10px cyan;
+    }
+
+    .info-content p {
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      color: #ccc;
+    }
+
+    .info-btn {
+      display: inline-block;
+      padding: 12px 22px;
+      background: cyan;
+      color: #000;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .info-btn:hover {
+      background: yellow;
+      box-shadow: 0 0 15px yellow;
+    }
+
     /* Services Section */
     .services {
       padding: 80px 20px;
@@ -248,6 +306,21 @@
   <section class="hero">
     <h1>Welcome to Darklight Cyber Security</h1>
     <p>Professional Cyber Security & Ethical Hacking Services</p>
+  </section>
+
+  <!-- 🔥 New Info Section -->
+  <section class="info-section">
+    <div class="info-image">
+      <img src="https://img.icons8.com/external-flatart-icons-flat-flatarticons/512/external-cybersecurity-technology-flatart-icons-flat-flatarticons.png" alt="Cyber Security">
+    </div>
+    <div class="info-content">
+      <h3>Advanced Cyber Security Solutions</h3>
+      <p>
+        In today’s digital world, protecting your business from cyber threats is more important than ever. 
+        We provide advanced cyber security strategies, penetration testing, and digital forensics to keep your systems safe.
+      </p>
+      <a href="#" class="info-btn">Learn More →</a>
+    </div>
   </section>
 
   <!-- Services Section -->
